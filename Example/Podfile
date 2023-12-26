@@ -1,16 +1,8 @@
 use_frameworks!
 
-platform :ios, '10.0'
+#platform :ios, '9.3'
 
 target 'LTFlexContainer_Example' do
   pod 'LTFlexContainer', :path => '../'
-
-  target 'LTFlexContainer_Tests' do
-    inherit! :search_paths
-
-    pod 'Specta'
-    pod 'Expecta'
-    pod 'FBSnapshotTestCase'
-    pod 'Expecta+Snapshots'
-  end
+  pod 'LookinServer', :configurations => ['Debug']
 end

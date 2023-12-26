@@ -1,0 +1,6 @@
+framework module Pods_LTFlexContainer_Example {
+  umbrella header "Pods-LTFlexContainer_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

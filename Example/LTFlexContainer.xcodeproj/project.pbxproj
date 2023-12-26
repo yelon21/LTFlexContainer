@@ -7,34 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2972956D99A3B4BF53A6FA06 /* Pods_LTFlexContainer_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847879A5CAC0E4C016D3A9CA /* Pods_LTFlexContainer_Tests.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* LDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* LDAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* LDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* LDViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
-		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
-		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
-		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
-		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		63AF192B2B3869B10061FD6D /* Menu.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63AF192A2B3869B10061FD6D /* Menu.plist */; };
+		63AF192F2B386A140061FD6D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AF192E2B386A140061FD6D /* ViewController.m */; };
+		63AF19352B386A290061FD6D /* FlexContainerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AF19332B386A290061FD6D /* FlexContainerVC.m */; };
+		63AF19362B386A290061FD6D /* FlexContainer2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AF19342B386A290061FD6D /* FlexContainer2VC.m */; };
+		63AF193A2B386B1D0061FD6D /* LTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AF19392B386B1D0061FD6D /* LTLabel.m */; };
+		63AF193F2B39D4F60061FD6D /* FlexXibVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AF193D2B39D4F60061FD6D /* FlexXibVC.m */; };
+		63AF19402B39D4F60061FD6D /* FlexXibVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63AF193E2B39D4F60061FD6D /* FlexXibVC.xib */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		878022992C77FABCF6774576 /* Pods_LTFlexContainer_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DF81E41421E5B30C6416F10 /* Pods_LTFlexContainer_Example.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		6003F5B3195388D20070C39A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6003F582195388D10070C39A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6003F589195388D20070C39A;
-			remoteInfo = LTFlexContainer;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		6003F58A195388D20070C39A /* LTFlexContainer_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LTFlexContainer_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,25 +37,30 @@
 		6003F59B195388D20070C39A /* LTFlexContainer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LTFlexContainer-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* LDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* LDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* LDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* LDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6003F5AE195388D20070C39A /* LTFlexContainer_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LTFlexContainer_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
-		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
-		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		63AF192A2B3869B10061FD6D /* Menu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Menu.plist; sourceTree = "<group>"; };
+		63AF192D2B386A140061FD6D /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		63AF192E2B386A140061FD6D /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		63AF19312B386A290061FD6D /* FlexContainerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexContainerVC.h; sourceTree = "<group>"; };
+		63AF19322B386A290061FD6D /* FlexContainer2VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexContainer2VC.h; sourceTree = "<group>"; };
+		63AF19332B386A290061FD6D /* FlexContainerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexContainerVC.m; sourceTree = "<group>"; };
+		63AF19342B386A290061FD6D /* FlexContainer2VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexContainer2VC.m; sourceTree = "<group>"; };
+		63AF19382B386B1D0061FD6D /* LTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTLabel.h; sourceTree = "<group>"; };
+		63AF19392B386B1D0061FD6D /* LTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTLabel.m; sourceTree = "<group>"; };
+		63AF193C2B39D4F60061FD6D /* FlexXibVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlexXibVC.h; sourceTree = "<group>"; };
+		63AF193D2B39D4F60061FD6D /* FlexXibVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlexXibVC.m; sourceTree = "<group>"; };
+		63AF193E2B39D4F60061FD6D /* FlexXibVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FlexXibVC.xib; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		82142F0CC0FA63176B0358AE /* LTFlexContainer.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = LTFlexContainer.podspec; path = ../LTFlexContainer.podspec; sourceTree = "<group>"; };
+		82142F0CC0FA63176B0358AE /* LTFlexContainer.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LTFlexContainer.podspec; path = ../LTFlexContainer.podspec; sourceTree = "<group>"; };
 		847879A5CAC0E4C016D3A9CA /* Pods_LTFlexContainer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LTFlexContainer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8DF81E41421E5B30C6416F10 /* Pods_LTFlexContainer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LTFlexContainer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94569B34485B42BB0E3C4D20 /* Pods-LTFlexContainer_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LTFlexContainer_Example.debug.xcconfig"; path = "Target Support Files/Pods-LTFlexContainer_Example/Pods-LTFlexContainer_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		ACE833D17B5769EC47EE4E40 /* Pods-LTFlexContainer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LTFlexContainer_Tests.debug.xcconfig"; path = "Target Support Files/Pods-LTFlexContainer_Tests/Pods-LTFlexContainer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		B0619B9DF47D7E2199BFC26B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		B0619B9DF47D7E2199BFC26B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		CC7F7AD0D651B53F486368DC /* Pods-LTFlexContainer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LTFlexContainer_Tests.release.xcconfig"; path = "Target Support Files/Pods-LTFlexContainer_Tests/Pods-LTFlexContainer_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		EEFF94DDD324B050BC3C2F29 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		EEFF94DDD324B050BC3C2F29 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F02281DC4C13C4B356410B5C /* Pods-LTFlexContainer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LTFlexContainer_Example.release.xcconfig"; path = "Target Support Files/Pods-LTFlexContainer_Example/Pods-LTFlexContainer_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,17 +76,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6003F5AB195388D20070C39A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
-				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
-				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				2972956D99A3B4BF53A6FA06 /* Pods_LTFlexContainer_Tests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -100,7 +84,6 @@
 			children = (
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* Example for LTFlexContainer */,
-				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				D1424F37093C4D56586C9EF7 /* Pods */,
@@ -111,7 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				6003F58A195388D20070C39A /* LTFlexContainer_Example.app */,
-				6003F5AE195388D20070C39A /* LTFlexContainer_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,8 +117,8 @@
 				6003F59C195388D20070C39A /* LDAppDelegate.h */,
 				6003F59D195388D20070C39A /* LDAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* LDViewController.h */,
-				6003F5A6195388D20070C39A /* LDViewController.m */,
+				63AF192C2B3869FB0061FD6D /* ViewController */,
+				63AF192A2B3869B10061FD6D /* Menu.plist */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -156,25 +138,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6003F5B5195388D20070C39A /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				6003F5BB195388D20070C39A /* Tests.m */,
-				6003F5B6195388D20070C39A /* Supporting Files */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		6003F5B6195388D20070C39A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				6003F5B7195388D20070C39A /* Tests-Info.plist */,
-				6003F5B8195388D20070C39A /* InfoPlist.strings */,
-				606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		60FF7A9C1954A5C5007DD14C /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +148,40 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		63AF192C2B3869FB0061FD6D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				63AF192D2B386A140061FD6D /* ViewController.h */,
+				63AF192E2B386A140061FD6D /* ViewController.m */,
+				63AF19302B386A290061FD6D /* FlexContainerVC */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		63AF19302B386A290061FD6D /* FlexContainerVC */ = {
+			isa = PBXGroup;
+			children = (
+				63AF19322B386A290061FD6D /* FlexContainer2VC.h */,
+				63AF19342B386A290061FD6D /* FlexContainer2VC.m */,
+				63AF19312B386A290061FD6D /* FlexContainerVC.h */,
+				63AF19332B386A290061FD6D /* FlexContainerVC.m */,
+				63AF193C2B39D4F60061FD6D /* FlexXibVC.h */,
+				63AF193D2B39D4F60061FD6D /* FlexXibVC.m */,
+				63AF193E2B39D4F60061FD6D /* FlexXibVC.xib */,
+				63AF19372B386B1D0061FD6D /* Label */,
+			);
+			path = FlexContainerVC;
+			sourceTree = "<group>";
+		};
+		63AF19372B386B1D0061FD6D /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				63AF19382B386B1D0061FD6D /* LTLabel.h */,
+				63AF19392B386B1D0061FD6D /* LTLabel.m */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
 		D1424F37093C4D56586C9EF7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,7 +190,6 @@
 				ACE833D17B5769EC47EE4E40 /* Pods-LTFlexContainer_Tests.debug.xcconfig */,
 				CC7F7AD0D651B53F486368DC /* Pods-LTFlexContainer_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -219,26 +215,6 @@
 			productReference = 6003F58A195388D20070C39A /* LTFlexContainer_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6003F5AD195388D20070C39A /* LTFlexContainer_Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "LTFlexContainer_Tests" */;
-			buildPhases = (
-				963E5904498BCA3E0A4F0A6E /* [CP] Check Pods Manifest.lock */,
-				6003F5AA195388D20070C39A /* Sources */,
-				6003F5AB195388D20070C39A /* Frameworks */,
-				6003F5AC195388D20070C39A /* Resources */,
-				A9C68CAF18CAA8BFDA10DF2B /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6003F5B4195388D20070C39A /* PBXTargetDependency */,
-			);
-			name = LTFlexContainer_Tests;
-			productName = LTFlexContainerTests;
-			productReference = 6003F5AE195388D20070C39A /* LTFlexContainer_Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -248,17 +224,13 @@
 				CLASSPREFIX = LD;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = yelon21;
-				TargetAttributes = {
-					6003F5AD195388D20070C39A = {
-						TestTargetID = 6003F589195388D20070C39A;
-					};
-				};
 			};
 			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "LTFlexContainer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -268,7 +240,6 @@
 			projectRoot = "";
 			targets = (
 				6003F589195388D20070C39A /* LTFlexContainer_Example */,
-				6003F5AD195388D20070C39A /* LTFlexContainer_Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -282,14 +253,8 @@
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6003F5AC195388D20070C39A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */,
+				63AF192B2B3869B10061FD6D /* Menu.plist in Resources */,
+				63AF19402B39D4F60061FD6D /* FlexXibVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,10 +269,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LTFlexContainer_Example/Pods-LTFlexContainer_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/LTFlexContainer/LTFlexContainer.framework",
+				"${BUILT_PRODUCTS_DIR}/LookinServer/LookinServer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTFlexContainer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LookinServer.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -336,52 +303,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		963E5904498BCA3E0A4F0A6E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LTFlexContainer_Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A9C68CAF18CAA8BFDA10DF2B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LTFlexContainer_Tests/Pods-LTFlexContainer_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Expecta/Expecta.framework",
-				"${BUILT_PRODUCTS_DIR}/Expecta+Snapshots/Expecta_Snapshots.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSnapshotTestCase/FBSnapshotTestCase.framework",
-				"${BUILT_PRODUCTS_DIR}/Specta/Specta.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Expecta.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Expecta_Snapshots.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Specta.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LTFlexContainer_Tests/Pods-LTFlexContainer_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -390,42 +311,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* LDAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* LDViewController.m in Sources */,
+				63AF19352B386A290061FD6D /* FlexContainerVC.m in Sources */,
+				63AF192F2B386A140061FD6D /* ViewController.m in Sources */,
+				63AF19362B386A290061FD6D /* FlexContainer2VC.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6003F5AA195388D20070C39A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6003F5BC195388D20070C39A /* Tests.m in Sources */,
+				63AF193A2B386B1D0061FD6D /* LTLabel.m in Sources */,
+				63AF193F2B39D4F60061FD6D /* FlexXibVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		6003F5B4195388D20070C39A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6003F589195388D20070C39A /* LTFlexContainer_Example */;
-			targetProxy = 6003F5B3195388D20070C39A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6003F596195388D20070C39A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6003F597195388D20070C39A /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		6003F5B8195388D20070C39A /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6003F5B9195388D20070C39A /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -522,6 +423,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LTFlexContainer/LTFlexContainer-Prefix.pch";
 				INFOPLIST_FILE = "LTFlexContainer/LTFlexContainer-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -538,57 +440,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LTFlexContainer/LTFlexContainer-Prefix.pch";
 				INFOPLIST_FILE = "LTFlexContainer/LTFlexContainer-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		6003F5C3195388D20070C39A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACE833D17B5769EC47EE4E40 /* Pods-LTFlexContainer_Tests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Tests/Tests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LTFlexContainer_Example.app/LTFlexContainer_Example";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		6003F5C4195388D20070C39A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC7F7AD0D651B53F486368DC /* Pods-LTFlexContainer_Tests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
-				INFOPLIST_FILE = "Tests/Tests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LTFlexContainer_Example.app/LTFlexContainer_Example";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -609,15 +466,6 @@
 			buildConfigurations = (
 				6003F5C0195388D20070C39A /* Debug */,
 				6003F5C1195388D20070C39A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "LTFlexContainer_Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6003F5C3195388D20070C39A /* Debug */,
-				6003F5C4195388D20070C39A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

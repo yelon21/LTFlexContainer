@@ -1,0 +1,22 @@
+{
+  "name": "LTFlexContainer",
+  "version": "0.1.0",
+  "summary": "A short description of LTFlexContainer.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/yelon21/LTFlexContainer",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "yelon21": "254956982@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/yelon21/LTFlexContainer.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "LTFlexContainer/Classes/**/*"
+}

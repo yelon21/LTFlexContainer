@@ -1,0 +1,25 @@
+PODS:
+  - LookinServer (1.2.5):
+    - LookinServer/Core (= 1.2.5)
+  - LookinServer/Core (1.2.5)
+  - LTFlexContainer (0.1.0)
+
+DEPENDENCIES:
+  - LookinServer
+  - LTFlexContainer (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - LookinServer
+
+EXTERNAL SOURCES:
+  LTFlexContainer:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  LookinServer: 6805292e8d2ff9ddfcfaa9357fc5c1f277c90afd
+  LTFlexContainer: 9d65edfefc8a19263a893055565b6fe0c0cb4257
+
+PODFILE CHECKSUM: aeebe45d81fa8fd8424a10160a9029f5b148ba69
+
+COCOAPODS: 1.12.1
