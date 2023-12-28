@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.summary          = 'flex layout tool'
 
   s.description      = <<-DESC
-模拟flex布局
+一个简单的flex布局工具
                        DESC
 
   s.homepage         = 'https://github.com/yelon21/LTFlexContainer'

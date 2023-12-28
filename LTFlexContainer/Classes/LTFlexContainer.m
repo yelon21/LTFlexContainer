@@ -1241,33 +1241,33 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
 #ifdef DEBUG
 #pragma mark - for lookin
 
-- (NSDictionary<NSString *, id> *)lookin_customDebugInfos3{
+- (NSDictionary<NSString *, id> *)lookin_customDebugInfos_3{
     NSDictionary<NSString *, id> *ret = @{
-        @"properties": [self flex_makeCustomProperties],
+        @"properties": [self flex_makeCustomProperties_3],
     };
     return ret;
 }
 
-- (NSArray *)flex_makeCustomProperties{
+- (NSArray *)flex_makeCustomProperties_3{
+
+    NSMutableArray *properties = [[NSMutableArray alloc] init];
     
-    NSMutableArray *properties = [NSMutableArray array];
-    
-    if([[self superclass] instancesRespondToSelector:@selector(flex_makeCustomProperties)]){
-        
-        Class superCls = class_getSuperclass([self class]);
-        struct objc_super obj_super_class = {
-            .receiver = self,
-            .super_class = superCls
-        };
-        
-        NSArray * (*getProperties)(void *, SEL) = (void *)objc_msgSendSuper;
-        NSArray *viewProperties = getProperties(&obj_super_class, @selector(flex_makeCustomProperties));
-    
-        if(viewProperties.count > 0){
-            
-            [properties addObjectsFromArray:viewProperties];
-        }
-    }
+//    SEL sel = NSSelectorFromString(@"flex_makeCustomProperties");
+//    if([[self superclass] instancesRespondToSelector:sel]){
+//        
+//        Class superCls = class_getSuperclass([self class]);
+//        struct objc_super obj_super_class = {
+//            .receiver = self,
+//            .super_class = superCls
+//        };
+//        NSArray * (*getProperties)(void *, SEL) = (void *)objc_msgSendSuper;
+//        NSArray *viewProperties = getProperties(&obj_super_class, sel);
+//    
+//        if(viewProperties.count > 0){
+//            
+//            [properties addObjectsFromArray:viewProperties];
+//        }
+//    }
     
     // bool property
     [properties addObject:@{
