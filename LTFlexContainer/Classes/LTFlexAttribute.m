@@ -43,7 +43,7 @@
     return nil;
 }
 
-LT_Flex_Attribute_PROPERTY_CHANGE(LTFlexAlignaSelfType, flexAlignaSelfType, FlexAlignaSelfType);
+LT_Flex_Attribute_PROPERTY_CHANGE(LTFlexAlignSelfType, flexAlignaSelfType, FlexAlignaSelfType);
 LT_Flex_Attribute_PROPERTY_CHANGE(CGFloat, flexOrder, FlexOrder);
 LT_Flex_Attribute_PROPERTY_CHANGE(NSUInteger, flexGrow, FlexGrow);
 LT_Flex_Attribute_PROPERTY_CHANGE(NSUInteger, flexShrink, FlexShrink);

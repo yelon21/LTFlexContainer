@@ -12,12 +12,12 @@
 @class LTFlexContainer;
 
 typedef enum : NSUInteger {
-    LTFlexAlignaSelfTypeAuto,
-    LTFlexAlignaSelfTypeFlexStart,
-    LTFlexAlignaSelfTypeFlexEnd,
-    LTFlexAlignaSelfTypeFlexCenter,
-    LTFlexAlignaSelfTypeFlexStretch,
-} LTFlexAlignaSelfType;
+    LTFlexAlignSelfTypeAuto,
+    LTFlexAlignSelfTypeFlexStart,
+    LTFlexAlignSelfTypeFlexEnd,
+    LTFlexAlignSelfTypeFlexCenter,
+    LTFlexAlignSelfTypeFlexStretch,
+} LTFlexAlignSelfType;
 
 typedef enum : NSUInteger {
     LTPositionTypeStatic,
@@ -28,7 +28,7 @@ typedef enum : NSUInteger {
 
 @interface LTFlexAttribute : NSObject
 
-@property(nonatomic, assign) LTFlexAlignaSelfType flexAlignaSelfType;
+@property(nonatomic, assign) LTFlexAlignSelfType flexAlignaSelfType;
 
 // 属性用来定义项目的排列顺序。数值越小，排列越靠前，默认为 0 。使用形式如下:
 @property(nonatomic, assign) CGFloat flexOrder;
@@ -57,7 +57,7 @@ typedef enum : NSUInteger {
 // private
 // 布局计算出的size
 @property(nonatomic, assign) CGSize cacheSize;
-@property(nonatomic, strong) LTFlexContainer *superView;
+@property(nonatomic, weak) LTFlexContainer *superView;
 
 + (instancetype)createWidthView:(UIView *)view;
 @end

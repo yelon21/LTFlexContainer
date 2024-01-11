@@ -71,7 +71,7 @@ IB_DESIGNABLE
 
 @property (nonatomic, strong) IBInspectable NSString *debugInfo;
 
--(void)lt_removeSubview:(UIView *)subview;
+-(void)lt_deleteSubview:(UIView *)subview;
 -(void)lt_removeAllSubviews;
 
 @end

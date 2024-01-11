@@ -114,8 +114,21 @@ NSString const *lt_cachingdHiddenState_key = @"lt_cachingdHiddenState_key";
     
     Method setHiddenMethod = class_getInstanceMethod([self class], @selector(setHidden:));
     Method lt_setHiddenMethod = class_getInstanceMethod([self class], @selector(lt_setHidden:));
-
     method_exchangeImplementations(setHiddenMethod, lt_setHiddenMethod);
+    
+    Method removeFromSuperviewMethod = class_getInstanceMethod([self class], @selector(removeFromSuperview));
+    Method lt_removeFromSuperviewMethod = class_getInstanceMethod([self class], @selector(lt_removeFromSuperview));
+    method_exchangeImplementations(removeFromSuperviewMethod, lt_removeFromSuperviewMethod);
+}
+
+-(void)lt_removeFromSuperview{
+    
+    LTFlexContainer *superView = self.lt_flexAttribute.superView;
+    if(superView){
+        
+        [superView lt_deleteSubview:self];
+    }
+    [self lt_removeFromSuperview];
 }
 
 - (void)lt_setHidden:(BOOL)hidden{
@@ -124,6 +137,11 @@ NSString const *lt_cachingdHiddenState_key = @"lt_cachingdHiddenState_key";
         self.lt_cachedHidden = hidden;
     }
     [self lt_setHidden:hidden];
+    UIView *superView = self.superview;
+    if([superView isKindOfClass:[LTFlexContainer class]]){
+        
+        [superView setNeedsLayout];
+    }
 }
 
 -(void)setLt_cachedHidden:(BOOL)lt_cachedHidden{
@@ -196,11 +214,11 @@ NSString const *lt_cachingdHiddenState_key = @"lt_cachingdHiddenState_key";
     }];
     
     {
-        NSDictionary *enumInfo = @{@"LTFlexAlignaSelfTypeAuto":@(LTFlexAlignaSelfTypeAuto),
-                                   @"LTFlexAlignaSelfTypeFlexStart":@(LTFlexAlignaSelfTypeFlexStart),
-                                   @"LTFlexAlignaSelfTypeFlexEnd":@(LTFlexAlignaSelfTypeFlexEnd),
-                                   @"LTFlexAlignaSelfTypeFlexCenter":@(LTFlexAlignaSelfTypeFlexCenter),
-                                   @"LTFlexAlignaSelfTypeFlexStretch":@(LTFlexAlignaSelfTypeFlexStretch)};
+        NSDictionary *enumInfo = @{@"LTFlexAlignSelfTypeAuto":@(LTFlexAlignSelfTypeAuto),
+                                   @"LTFlexAlignSelfTypeFlexStart":@(LTFlexAlignSelfTypeFlexStart),
+                                   @"LTFlexAlignSelfTypeFlexEnd":@(LTFlexAlignSelfTypeFlexEnd),
+                                   @"LTFlexAlignSelfTypeFlexCenter":@(LTFlexAlignSelfTypeFlexCenter),
+                                   @"LTFlexAlignSelfTypeFlexStretch":@(LTFlexAlignSelfTypeFlexStretch)};
         
         NSString *defaultString = [[enumInfo allKeysForObject:@(flexAttribute.flexAlignaSelfType)] firstObject];
         

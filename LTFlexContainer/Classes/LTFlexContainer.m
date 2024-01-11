@@ -75,24 +75,6 @@ LT_Flex_IB_PROPERTY_ADAPTER(NSUInteger, flexAlignContentType);
 @implementation LTFlexContainer
 @synthesize subviewsSet = _subviewsSet;
 
-//-(void)awakeFromNib{
-//
-//    [super awakeFromNib];
-//    if(![self.superview isKindOfClass:[LTFlexContainer class]]){
-//
-//        CGSize frameSize = self.frame.size;
-//
-//        CGSize size = [self sizeThatFits:frameSize];
-//        size.width = MAX(size.width, frameSize.width);
-//        size.height = MAX(size.height, frameSize.height);
-//
-//        CGRect rect = self.frame;
-//        rect.size = size;
-//
-//        self.frame = rect;
-//    }
-//}
-
 -(instancetype)initWidthHideContainerView:(BOOL)hideContainerView{
     
     if(self = [super init]){
@@ -276,10 +258,9 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
     [super addSubview:view];
 }
 
--(void)lt_removeSubview:(UIView *)subview{
-    
+-(void)lt_deleteSubview:(UIView *)subview{
+
     [self.subviewsSet removeObject:subview];
-    [subview removeFromSuperview];
     subview.lt_flexAttribute.superView = nil;
 }
 
@@ -288,23 +269,17 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
     [self.subviewsSet enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 
         [obj removeFromSuperview];
-        obj.lt_flexAttribute.superView = nil;
     }];
-    [self.subviewsSet removeAllObjects];
 }
 
 -(void)removeFromSuperview{
     
-    [super removeFromSuperview];
-    
-    if(_hideContainerView){
+    [self.subviewsSet enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        [self.subviewsSet enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            [obj removeFromSuperview];
-            obj.lt_flexAttribute.superView = nil;
-        }];
-    }
+        [obj removeFromSuperview];
+    }];
+    
+    [super removeFromSuperview];
 }
 
 -(void)setNeedsLayoutWhileFrameIsNotZero{
@@ -412,6 +387,7 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
             
             if(CGSizeEqualToSize(itemSize, CGSizeZero)){
                 itemSize = [itemView sizeThatFits:CGSizeMake(CGFLOAT_MAX, contentH-appendHeight)];
+                [self adjustItemSizeForView:itemView byCurrentSize:&itemSize];
             }
             
             itemView.lt_flexAttribute.cacheSize = itemSize;
@@ -428,6 +404,7 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
         
         if(CGSizeEqualToSize(itemSize, CGSizeZero)){
             itemSize = [itemView sizeThatFits:CGSizeMake(contentW-marginWidth, contentH)];
+            [self adjustItemSizeForView:itemView byCurrentSize:&itemSize];
         }
         itemSize.width += marginWidth;
         itemSize.height += UIEdgeInsetsGetHeight(itemView.lt_marginEdgeInsets);
@@ -704,6 +681,7 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
             
             if(CGSizeEqualToSize(itemSize, CGSizeZero)){
                 itemSize = [itemView sizeThatFits:CGSizeMake(contentW-appendWidth, CGFLOAT_MAX)];
+                [self adjustItemSizeForView:itemView byCurrentSize:&itemSize];
             }
             
             itemView.lt_flexAttribute.cacheSize = itemSize;
@@ -720,6 +698,7 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
         
         if(CGSizeEqualToSize(itemSize, CGSizeZero)){
             itemSize = [itemView sizeThatFits:CGSizeMake(contentW-marginWidth, CGFLOAT_MAX)];
+            [self adjustItemSizeForView:itemView byCurrentSize:&itemSize];
         }
         itemSize.width += marginWidth;
         itemSize.height += UIEdgeInsetsGetHeight(itemView.lt_marginEdgeInsets);
@@ -1110,27 +1089,27 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
 
 - (void)getCrossAxisItemStartValue:(CGFloat *)startValue
                     itemCrossValue:(CGFloat *)itemCrossValue
-           byItemFlexAlignaSelfTyp:(LTFlexAlignaSelfType)type
+           byItemFlexAlignaSelfTyp:(LTFlexAlignSelfType)type
              sectionCrossLeftSpace:(CGFloat)leftSpacce
               sectionCrossMaxSpace:(CGFloat)sectionCrossMaxSpace{
     
     switch (type) {
-        case LTFlexAlignaSelfTypeFlexStart:{
+        case LTFlexAlignSelfTypeFlexStart:{
             break;
         }
-        case LTFlexAlignaSelfTypeFlexEnd:{
+        case LTFlexAlignSelfTypeFlexEnd:{
             *startValue = leftSpacce;
             break;
         }
-        case LTFlexAlignaSelfTypeFlexCenter:{
+        case LTFlexAlignSelfTypeFlexCenter:{
             *startValue = leftSpacce/2;
             break;
         }
-        case LTFlexAlignaSelfTypeFlexStretch:{
+        case LTFlexAlignSelfTypeFlexStretch:{
             *itemCrossValue = sectionCrossMaxSpace;
             break;
         }
-        case LTFlexAlignaSelfTypeAuto:{
+        case LTFlexAlignSelfTypeAuto:{
             
             switch (self.flexAlignItemsType) {
                 case LTFlexAlignItemsTypeFlexStart:{
@@ -1158,7 +1137,7 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
     
     [self fixCorrectSuperView:view];
     
-    CGRect frame = [self getFrame:view inSize:size];
+    CGRect frame = [self getFrameForView:view inSize:size];
     
     if(_hideContainerView){
         CGPoint offset = _containerFrame.origin;
@@ -1182,12 +1161,12 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
     
     CGSize size = superview.bounds.size;
     
-    CGRect frame = [self getFrame:view inSize:size];
+    CGRect frame = [self getFrameForView:view inSize:size];
     
     view.frame = frame;
 }
 
-- (CGRect)getFrame:(UIView *)view inSize:(CGSize)size{
+- (CGRect)getFrameForView:(UIView *)view inSize:(CGSize)size{
     
     CGRect frame;
     
@@ -1238,6 +1217,24 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
     return frame;
 }
 
+- (void)adjustItemSizeForView:(UIView *)itemView byCurrentSize:(CGSize *)size{
+    
+    CGSize itemSize = *size;
+    if(itemView.lt_flexAttribute.minHeight>1){
+        itemSize.height = MAX(itemSize.height, itemView.lt_flexAttribute.minHeight);
+    }
+    if(itemView.lt_flexAttribute.maxHeight>1){
+        itemSize.height = MIN(itemSize.height, itemView.lt_flexAttribute.maxHeight);
+    }
+    if(itemView.lt_flexAttribute.minWidth>1){
+        itemSize.width = MAX(itemSize.width, itemView.lt_flexAttribute.minWidth);
+    }
+    if(itemView.lt_flexAttribute.maxWidth>1){
+        itemSize.width = MIN(itemSize.width, itemView.lt_flexAttribute.maxWidth);
+    }
+    *size = itemSize;
+}
+
 #ifdef DEBUG
 #pragma mark - for lookin
 
@@ -1254,7 +1251,7 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
     
 //    SEL sel = NSSelectorFromString(@"flex_makeCustomProperties");
 //    if([[self superclass] instancesRespondToSelector:sel]){
-//        
+//
 //        Class superCls = class_getSuperclass([self class]);
 //        struct objc_super obj_super_class = {
 //            .receiver = self,
@@ -1262,9 +1259,9 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
 //        };
 //        NSArray * (*getProperties)(void *, SEL) = (void *)objc_msgSendSuper;
 //        NSArray *viewProperties = getProperties(&obj_super_class, sel);
-//    
+//
 //        if(viewProperties.count > 0){
-//            
+//
 //            [properties addObjectsFromArray:viewProperties];
 //        }
 //    }
