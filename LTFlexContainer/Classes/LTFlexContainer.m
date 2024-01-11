@@ -259,7 +259,7 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
 }
 
 -(void)lt_deleteSubview:(UIView *)subview{
-
+//
     [self.subviewsSet removeObject:subview];
     subview.lt_flexAttribute.superView = nil;
 }
@@ -274,10 +274,13 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
 
 -(void)removeFromSuperview{
     
-    [self.subviewsSet enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if(_hideContainerView){
         
-        [obj removeFromSuperview];
-    }];
+        [self.subviewsSet enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            [super addSubview:obj];
+        }];
+    }
     
     [super removeFromSuperview];
 }
