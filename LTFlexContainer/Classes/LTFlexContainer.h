@@ -51,7 +51,7 @@ typedef enum : NSUInteger {
 } LTFlexAlignContentType;
 
 IB_DESIGNABLE
-
+// 所有子视图通过addSubview添加， 不支持其他方式
 @interface LTFlexContainer : UIView
 
 @property (nonatomic, assign) LTFlexDirectionType flexDirectionType;

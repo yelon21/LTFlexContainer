@@ -212,9 +212,9 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
         return;
     }
     
-    [super setHidden:hidden];
-    
     if(!_hideContainerView){
+        
+        [super setHidden:hidden];
         return;
     }
     
@@ -227,7 +227,11 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
             obj.lt_cachingdHiddenState = YES;
         }else{
             
-            obj.lt_cachingdHiddenState = NO;
+            LTFlexContainer *flexView = (LTFlexContainer *)obj;
+            if(![flexView isKindOfClass:[LTFlexContainer class]] || !flexView.hideContainerView){
+                
+                obj.lt_cachingdHiddenState = NO;
+            }
             obj.hidden = obj.lt_cachedHidden;
         }
     }];
@@ -240,13 +244,16 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
 
 -(void)addSubview:(UIView *)view{
     
-    LTPositionType positionType = view.lt_flexAttribute.positionType;
-    if(!_hideContainerView && (positionType==LTPositionTypeStatic
-                                  ||positionType==LTPositionTypeRelative)){
-        [super addSubview:view];
+    if(![view isKindOfClass:[UIView class]]){
+        return;
     }
-
-    if([view isKindOfClass:[UIView class]]){
+    if(![self.subviewsSet containsObject:view]){
+        
+//        LTPositionType positionType = view.lt_flexAttribute.positionType;
+//        if(!_hideContainerView && (positionType==LTPositionTypeStatic
+//                                      ||positionType==LTPositionTypeRelative)){
+//            [super addSubview:view];
+//        }
         
         [self.subviewsSet addObject:view];
         view.lt_flexAttribute.superView = self;
@@ -254,7 +261,6 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
 }
 
 -(void)lt_addSubview:(UIView *)view{
-    
     [super addSubview:view];
 }
 
@@ -266,7 +272,8 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
 
 -(void)lt_removeAllSubviews{
     
-    [self.subviewsSet enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    NSArray *subViews = self.subviewsSet.array;
+    [subViews enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 
         [obj removeFromSuperview];
     }];
@@ -275,8 +282,8 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
 -(void)removeFromSuperview{
     
     if(_hideContainerView){
-        
-        [self.subviewsSet enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSArray *subViews = self.subviewsSet.array;
+        [subViews enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             [super addSubview:obj];
         }];
@@ -927,28 +934,46 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
     }];
 }
 
+- (UIView *)findAbsoluteSubviewForView:(UIView *)superView{
+    
+    __block UIView *desView = nil;
+    [superView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        if(obj.lt_flexAttribute.positionType == LTPositionTypeAbsolute){
+            desView = obj;
+            *stop = YES;
+        }
+    }];
+    return desView;
+}
+
 - (void)fixCorrectSuperView:(UIView *)view{
+    
+    LTFlexContainer *superview = self;
     
     if(_hideContainerView){
         
-        LTFlexContainer *superview = (LTFlexContainer *)self.superview;
+        superview = (LTFlexContainer *)self.superview;
         
-        //                    while ([superview isKindOfClass:[LTFlexContainer class]] && superview.hideContainerView) {
-        //                        superview = (LTFlexContainer *)superview.superview;
-        //                    }
-        if(superview&&view.superview != superview){
+//        while ([superview isKindOfClass:[LTFlexContainer class]] && superview.hideContainerView) {
+//            superview = (LTFlexContainer *)superview.superview;
+//        }
+    }
+    
+    if(superview&&view.superview != superview){
+        
+        BOOL superViewIsFlexContainer = [superview isKindOfClass:[LTFlexContainer class]];
+        UIView *absoluteView = [self findAbsoluteSubviewForView:superview];
+        if(absoluteView){
             
-            if([superview isKindOfClass:[LTFlexContainer class]]){
+            [superview insertSubview:view belowSubview:absoluteView];
+        }else{
+            
+            if(superViewIsFlexContainer){
                 [superview lt_addSubview:view];
             }else{
                 [superview addSubview:view];
             }
-        }
-    }else{
-        
-        if(view.superview != self){
-            
-            [super addSubview:view];
         }
     }
 }
