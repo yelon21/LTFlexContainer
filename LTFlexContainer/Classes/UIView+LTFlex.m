@@ -97,8 +97,6 @@ NSString const *lt_cachedHidden_key = @"lt_cachedHidden_key";
 NSString const *lt_cachingdHiddenState_key = @"lt_cachingdHiddenState_key";
 @implementation UIView (LTFlex)
 @dynamic lt_flexAttribute;
-@dynamic lt_cachedHidden;
-@dynamic lt_cachingdHiddenState;
 
 -(LTFlexAttribute *)lt_flexAttribute{
     LTFlexAttribute *attr = objc_getAssociatedObject(self, &lt_flex_attribute_key);
@@ -133,41 +131,12 @@ NSString const *lt_cachingdHiddenState_key = @"lt_cachingdHiddenState_key";
 
 - (void)lt_setHidden:(BOOL)hidden{
     
-    if(self.lt_cachingdHiddenState){
-        self.lt_cachedHidden = hidden;
-    }
     [self lt_setHidden:hidden];
-    UIView *superView = self.superview;
-    if([superView isKindOfClass:[LTFlexContainer class]]){
-        
-        [superView setNeedsLayout];
-    }
-}
-
--(void)setLt_cachedHidden:(BOOL)lt_cachedHidden{
-    
-    objc_setAssociatedObject(self, &lt_cachedHidden_key,
-                             [NSNumber numberWithBool:lt_cachedHidden],
-                             OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
--(BOOL)lt_cachedHidden{
-    
-    NSNumber *value = [self getValueByKey:&lt_cachedHidden_key];
-    return [value boolValue];
-}
-
--(void)setLt_cachingdHiddenState:(BOOL)lt_cachingdHiddenState{
-    
-    objc_setAssociatedObject(self, &lt_cachingdHiddenState_key,
-                             [NSNumber numberWithBool:lt_cachingdHiddenState],
-                             OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
--(BOOL)lt_cachingdHiddenState{
-    
-    NSNumber *value = [self getValueByKey:&lt_cachingdHiddenState_key];
-    return [value boolValue];
+//    UIView *superView = self.superview;
+//    if([superView isKindOfClass:[LTFlexContainer class]]){
+//        
+//        [superView setNeedsLayout];
+//    }
 }
 
 -(id)getValueByKey:(const void * _Nonnull)key{

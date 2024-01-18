@@ -12,9 +12,6 @@
 @interface UIView (LTFlex)
 
 @property(nonatomic, strong) LTFlexAttribute *lt_flexAttribute;
-// private
-@property(nonatomic, assign) BOOL lt_cachedHidden;
-@property(nonatomic, assign) BOOL lt_cachingdHiddenState;
 @end
 
 @interface UIView (LTLayout)

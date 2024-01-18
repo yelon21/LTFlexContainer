@@ -60,26 +60,26 @@ LT_Flex_IB_PROPERTY_ADAPTER(NSUInteger, flexAlignContentType);
 }
 @end
 
-@interface LTFlexContainer (){
-    
-    CGRect _containerFrame;
-}
+@interface LTFlexContainer ()
 
 @property(nonatomic, strong, readonly) NSMutableOrderedSet <UIView *>*subviewsSet;
 
 // 仅仅是添加view到当前view，用于内部使用
 -(void)lt_addSubview:(UIView *)view;
-
+// private
+@property(nonatomic, assign) BOOL disableHideContainerView;
+@property(nonatomic, assign) BOOL cachedDisableHideContainerView;
 @end
 
 @implementation LTFlexContainer
 @synthesize subviewsSet = _subviewsSet;
+@synthesize hideContainerView = _hideContainerView;
 
 -(instancetype)initWidthHideContainerView:(BOOL)hideContainerView{
     
     if(self = [super init]){
 #ifdef DEBUG
-//        hideContainerView = NO;
+        //        hideContainerView = NO;
 #endif
         self.hideContainerView = hideContainerView;
     }
@@ -89,11 +89,11 @@ LT_Flex_IB_PROPERTY_ADAPTER(NSUInteger, flexAlignContentType);
 #pragma mark - setter
 #define LT_Flex_PROPERTY_CHANGE(type,property,Property)\
 -(void)set##Property:(type)property{\
-    if(_##property == property){     \
-        return;                     \
-    }                                   \
-    _##property = property;             \
-    [self setNeedsLayoutWhileFrameIsNotZero];     \
+if(_##property == property){     \
+return;                     \
+}                                   \
+_##property = property;             \
+[self setNeedsLayoutWhileFrameIsNotZero];     \
 }
 
 LT_Flex_PROPERTY_CHANGE(LTFlexDirectionType, flexDirectionType, FlexDirectionType);
@@ -101,32 +101,6 @@ LT_Flex_PROPERTY_CHANGE(LTFlexWrapType, flexWrapType, FlexWrapType);
 LT_Flex_PROPERTY_CHANGE(LTFlexJustifyContentType, flexJustifyContentType, FlexJustifyContentType);
 LT_Flex_PROPERTY_CHANGE(LTFlexAlignItemsType, flexAlignItemsType, FlexAlignItemsType);
 LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignContentType);
-
-- (void)setHideContainerView:(BOOL)hideContainerView{
-    
-    if(_hideContainerView == hideContainerView){
-        return;
-    }
-    _hideContainerView = hideContainerView;
-    
-    if(_hideContainerView){
-        
-        self.lt_cachedHidden = self.hidden;
-        [super setHidden:YES];
-        self.lt_cachingdHiddenState = YES;
-    }else{
-        self.lt_cachingdHiddenState = NO;
-        [super setHidden:self.lt_cachedHidden];
-    }
-    [self setNeedsLayoutWhileFrameIsNotZero];
-//    CGRect newFrame = _containerFrame;
-//    if(_lt_hideContainerView){
-//
-//        CGFloat width = _containerFrame.size.width+_containerFrame.size.height+_containerFrame.origin.x+_containerFrame.origin.y;
-//        newFrame = CGRectMake(LT_FLEX_MAX_VALUE, 0, width, CGFLOAT_MIN);
-//    }
-//    [super setFrame:newFrame];
-}
 
 -(NSMutableOrderedSet<UIView *> *)subviewsSet{
     
@@ -138,25 +112,29 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
 
 - (NSArray<UIView *> *)visibleSubviews {
     
-    NSMutableArray<UIView *> *visibleViews = [[NSMutableArray alloc] init];
+    NSMutableArray<UIView *> *visibleViews = [[NSMutableArray alloc] initWithCapacity:self.subviewsSet.count];
 
-    [self.subviewsSet enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if(self.disableHideContainerView || (!self.hideContainerView && self.hidden)){
         
-        do {
-            if([obj isKindOfClass:[LTFlexContainer class]]){
-                
-                LTFlexContainer *containerr = (LTFlexContainer *)obj;
-                if(containerr.hideContainerView&&containerr.lt_cachedHidden == NO){
-                    break;
-                }
-            }
-            if(obj.hidden&&!obj.lt_flexAttribute.holdPlaceholder){
+        [visibleViews setArray:self.subviewsSet.array];
+    }else{
+
+        [self.subviewsSet enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if(!obj.hidden || obj.lt_flexAttribute.holdPlaceholder){
+                [visibleViews addObject:obj];
                 return;
             }
-        } while (NO);
-        
-        [visibleViews addObject:obj];
-    }];
+            
+            LTFlexContainer *flexView = (LTFlexContainer *)obj;
+            if([flexView isKindOfClass:[LTFlexContainer class]]){
+                if(flexView.hideContainerView&&!flexView.disableHideContainerView){
+                        
+                    [visibleViews addObject:flexView];
+                }
+            }
+        }];
+    }
     
     NSArray *sortedViews = [visibleViews sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         UIView *view1 = obj1;
@@ -180,62 +158,117 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
 #endif
 }
 
--(void)setFrame:(CGRect)frame{
+- (void)setHideContainerView:(BOOL)hideContainerView{
+
+    if(_hideContainerView == hideContainerView){
+        return;
+    }
+    _hideContainerView = hideContainerView;
     
-    if(LTCGRectEqualToRect(frame, _containerFrame)){
+    if(_disableHideContainerView){
+        
         [self setNeedsLayoutWhileFrameIsNotZero];
         return;
     }
-    _containerFrame = frame;
     
-//    CGRect newFrame = frame;
-//    if(_lt_hideContainerView){
-//
-//        CGFloat width = frame.size.width+frame.size.height+frame.origin.x+frame.origin.y;
-//        newFrame = CGRectMake(width, 0, width, CGFLOAT_MIN);
-//    }
-//    [super setFrame:newFrame];
-    [super setFrame:frame];
+    if(_hideContainerView){
+
+        [super setHidden:YES];
+    }else{
+
+        [super setHidden:NO];
+    }
+
+    [self setNeedsLayoutWhileFrameIsNotZero];
 }
 
--(CGRect)frame{
+-(void)setDisableHideContainerView:(BOOL)disableHideContainerView{
+    
+    if(_disableHideContainerView == disableHideContainerView){
+        return;
+    }
+    _disableHideContainerView = disableHideContainerView;
+    
+    [self.subviewsSet enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 
-    return _containerFrame;
+        LTFlexContainer *flexView = (LTFlexContainer *)obj;
+        if([flexView isKindOfClass:[LTFlexContainer class]]){
+
+            if(_disableHideContainerView){
+                flexView.disableHideContainerView = _disableHideContainerView;
+            }else{
+                flexView.disableHideContainerView = flexView.cachedDisableHideContainerView;
+            }
+        }
+    }];
+    [self setNeedsLayoutWhileFrameIsNotZero];
+}
+
+-(void)setFrame:(CGRect)frame{
+    
+    [super setFrame:frame];
+    if(self.hideContainerView&&!self.disableHideContainerView){
+        
+        [self setNeedsLayoutWhileFrameIsNotZero];
+    }
 }
 
 -(void)setHidden:(BOOL)hidden{
     
-    if(self.lt_cachingdHiddenState){
-        self.lt_cachedHidden = hidden;
-    }
-    if(!_hideContainerView && self.hidden == hidden){
-        return;
-    }
-    
-    if(!_hideContainerView){
+    if(hidden){
+        
+        if(_hideContainerView&&!_disableHideContainerView){
+            
+            self.disableHideContainerView = YES;
+            self.cachedDisableHideContainerView = YES;
+        }
         
         [super setHidden:hidden];
-        return;
-    }
-    
-    [self.subviewsSet enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    }else{
         
-        if(hidden){
+        if(_hideContainerView){
             
-            obj.lt_cachedHidden = obj.hidden;
-            obj.hidden = hidden;
-            obj.lt_cachingdHiddenState = YES;
+            [super setHidden:YES];
+            
+            if(_disableHideContainerView&&self.superview.hidden == NO){
+                
+                self.disableHideContainerView = NO;
+                self.cachedDisableHideContainerView = NO;
+            }
         }else{
             
-            LTFlexContainer *flexView = (LTFlexContainer *)obj;
-            if(![flexView isKindOfClass:[LTFlexContainer class]] || !flexView.hideContainerView){
-                
-                obj.lt_cachingdHiddenState = NO;
-            }
-            obj.hidden = obj.lt_cachedHidden;
+            [super setHidden:hidden];
         }
-    }];
+    }
+    
+//    if(self.hideContainerView){
+//
+//        [self.subviewsSet enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//            LTFlexContainer *flexView = (LTFlexContainer *)obj;
+//            if([flexView isKindOfClass:[LTFlexContainer class]]){
+//
+//                flexView.disableHideContainerView = self.disableHideContainerView;
+////                [flexView flex_setHidden:hidden];
+//            }
+//        }];
+//    }
 }
+
+//- (void)flex_setHidden:(BOOL)hidden{
+//
+//    if(self.hideContainerView){
+//
+//        if(hidden){
+//            self.disableHideContainerView = hidden;
+//        }else {
+//
+//            if (!self.superview.hidden){
+//                self.disableHideContainerView = hidden;
+//            }
+//        }
+//    }
+//}
 
 -(NSArray *)lt_subviews{
     
@@ -281,7 +314,7 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
 
 -(void)removeFromSuperview{
     
-    if(_hideContainerView){
+    if(self.hideContainerView&&!self.disableHideContainerView){
         NSArray *subViews = self.subviewsSet.array;
         [subViews enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
@@ -303,7 +336,7 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
 -(void)layoutSubviews{
     
     [super layoutSubviews];
-    [self sizeThatFits:_containerFrame.size layout:YES];
+    [self sizeThatFits:self.frame.size layout:YES];
 }
 
 -(CGSize)sizeThatFits:(CGSize)size{
@@ -586,8 +619,8 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
                 }
                 
                 CGPoint offset = CGPointZero;
-                if(_hideContainerView){
-                    offset = _containerFrame.origin;
+                if(self.hideContainerView&&!self.disableHideContainerView){
+                    offset = self.frame.origin;
                 }
                 
                 CGPoint relativeOffset = CGPointZero;
@@ -885,8 +918,8 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
                 }
                 
                 CGPoint offset = CGPointZero;
-                if(_hideContainerView){
-                    offset = _containerFrame.origin;
+                if(self.hideContainerView&&!self.disableHideContainerView){
+                    offset = self.frame.origin;
                 }
                 CGPoint relativeOffset = CGPointZero;
                 if(flexAttribute.positionType == LTPositionTypeRelative){
@@ -951,7 +984,7 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
     
     LTFlexContainer *superview = self;
     
-    if(_hideContainerView){
+    if(self.hideContainerView&&!self.disableHideContainerView){
         
         superview = (LTFlexContainer *)self.superview;
         
@@ -1167,8 +1200,8 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
     
     CGRect frame = [self getFrameForView:view inSize:size];
     
-    if(_hideContainerView){
-        CGPoint offset = _containerFrame.origin;
+    if(self.hideContainerView&&!self.disableHideContainerView){
+        CGPoint offset = self.frame.origin;
         frame.origin.x += offset.x;
         frame.origin.y += offset.y;
     }
@@ -1314,6 +1347,21 @@ LT_Flex_PROPERTY_CHANGE(LTFlexAlignContentType, flexAlignContentType, FlexAlignC
         @"retainedSetter": ^(BOOL newBool) {
         self.hidden = newBool;
     }
+    }];
+    
+    BOOL hidden = self.hidden;
+    if(self.hideContainerView&&!self.disableHideContainerView){
+        hidden = NO;
+    }
+    // bool property
+    [properties addObject:@{
+        @"section": @"Flex",
+        @"title": @"real Hidden",
+        @"value": [NSNumber numberWithBool:hidden],
+        @"valueType": @"bool",
+        @"retainedSetter": ^(BOOL newBool) {
+        self.hidden = newBool;
+        }
     }];
     
     {
